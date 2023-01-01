@@ -3,7 +3,7 @@
 	"scripts": {
 		"resources:copy": "copyfiles --up 4 ./src/main/resources/public/**/* ./build",
 		"sass:compile": "node-sass --outputStyle compressed src/main/sass/ -o build/",
-		"build": "webpack && npm run sass:compile && npm run resources:copy",
+		"build": "npm run format && webpack && npm run sass:compile && npm run resources:copy",
 		"clean": "tsc --build --clean",
 		"format": "prettier --write ./src"
 	},
