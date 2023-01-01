@@ -1,4 +1,6 @@
-export default class FullPageError {
+import View from "../sdk/view";
+
+export default class FullPageError implements View {
 	public static withMessage(withMessage: string): FullPageError {
 		const fullPageError = new FullPageError();
 		fullPageError.message = withMessage;
@@ -15,7 +17,11 @@ export default class FullPageError {
 		this._message = withMessage;
 	}
 
-	public appendTo(parent: HTMLElement): void {
+	public onDomLoad() {}
+
+	public onDomUnload() {}
+
+	public htmlElements(): Array<HTMLElement> {
 		var message = document.createElement("p");
 		message.textContent = this._message;
 
@@ -23,9 +29,6 @@ export default class FullPageError {
 		container.appendChild(message);
 		container.classList.add("mwm-component-fullPageError");
 
-		while (parent.children.length > 0) {
-			parent.removeChild(parent.children[0]);
-		}
-		parent.appendChild(container);
+		return [container];
 	}
 }
