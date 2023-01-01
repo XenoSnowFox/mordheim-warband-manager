@@ -2,29 +2,33 @@
 <html lang="en">
 	<head>
 		<title>Mordheim Warband Manager</title>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="robots" content="noindex">
-		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="robots" content="noindex" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
 		<link rel="manifest" href="/manifest.webmanifest" crossorigin="use-credentials" />
 		<script async>
-			if ('serviceWorker' in navigator) {
-				navigator.serviceWorker.register('./service-worker.js')
-				.then(function(registration) {
-					// Registration was successful
-					console.log('ServiceWorker registration successful with scope: ', registration.scope);
-				}).catch(function(err) {
-					// registration failed :(
-					console.log('ServiceWorker registration failed: ', err);
-				});
+			if ("serviceWorker" in navigator) {
+				navigator.serviceWorker
+					.register("./service-worker.js")
+					.then(function (registration) {
+						// Registration was successful
+						console.log("ServiceWorker registration successful with scope: ", registration.scope);
+					})
+					.catch(function (err) {
+						// registration failed :(
+						console.log("ServiceWorker registration failed: ", err);
+					});
 			}
 		</script>
-		<link href="./app.css" rel="stylesheet">
+		<link href="./app.css" rel="stylesheet" />
 		<script src="./app.js" async defer></script>
 	</head>
 	<body>
 		<noscript>
-			This application requires JavaScript.
+			<div class="mwm-component-fullpageerror">
+				<p>This application requires JavaScript.</p>
+			</div>
 		</noscript>
 	</body>
 </html>

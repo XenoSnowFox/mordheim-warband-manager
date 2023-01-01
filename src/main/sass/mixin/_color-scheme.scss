@@ -1,21 +1,21 @@
 @mixin apply-scheme() {
-    background: var(--color-background-primary);
-    color: var(--color-text-primary);
-    fill: var(--color-text-primary);
+	background: var(--color-background-primary);
+	color: var(--color-text-primary);
+	fill: var(--color-text-primary);
 }
 
-@mixin color-scheme-black() {
-    --color-background-primary: var(--palette-black-dark);
-    --color-text-primary: var(--palette-white-lightest);
+@mixin color-preference-dark() {
+	--color-background-primary: var(--palette-black-dark);
+	--color-text-primary: var(--palette-white-lightest);
 	--color-divider: var(--palette-divider-light);
 
-    @include apply-scheme();
+	@include apply-scheme();
 }
 
-@mixin color-scheme-white() {
-    --color-background-primary: var(--palette-white-lightest);
-    --color-text-primary: var(--palette-black-normal);
+@mixin color-preference-light() {
+	--color-background-primary: var(--palette-white-lightest);
+	--color-text-primary: var(--palette-black-normal);
 	--color-divider: var(--palette-divider-dark);
 
-    @include apply-scheme();
+	@include apply-scheme();
 }
