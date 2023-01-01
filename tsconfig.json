@@ -1,0 +1,18 @@
+{
+	"compilerOptions": {
+	  "noImplicitAny": true,
+	  "noEmitOnError": true,
+	  "removeComments": true,
+	  "sourceMap": false,
+	  "target": "es5",
+	  "module": "commonjs",
+	  "lib": ["es5", "es6", "dom"],
+	  "allowJs": true,
+	  "jsx": "react",
+	  "rootDir": "./src/main/typescript",
+	  "downlevelIteration": true
+	},
+	"include": [
+	  "./src/main/typescript/**/*"
+	]
+}
