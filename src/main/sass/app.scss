@@ -1,0 +1,257 @@
+@import "./mixin/color-scheme";
+
+:root {
+    --palette-black-darkest: #000;
+    --palette-black-darker: #1e1e1e;
+    --palette-black-dark: #212121;
+    --palette-black-normal: #2e2e2e;
+    --palette-black-light: #363636;
+    --palette-black-lighter: #494949;
+    --palette-black-lightest: #4f4f4f;
+
+    --palette-white-darkest: #6c757d;
+    --palette-white-darker: #adb5bd;
+    --palette-white-dark: #ced4da;
+    --palette-white-normal: #dee2e6;
+    --palette-white-light: #e9ecef;
+    --palette-white-lighter: #f8f9fa;
+    --palette-white-lightest: #fff;
+
+    --palette-red-darkest: #af1629;
+    --palette-red-darker: #af1629;
+    --palette-red-dark: #af1629;
+    --palette-red-normal: #af1629;
+    --palette-red-light: #C01111;
+    --palette-red-lighter: #C01111;
+    --palette-red-lightest: #C01111;
+
+    --palette-yellow-normal: #FFD850;
+
+    --palette-aqua-normal: #5D95A0;
+
+    --palette-green-darkest: #143601;
+    --palette-green-darker: #1a4301;
+    --palette-green-dark: #245501;
+    --palette-green-normal: #538d22;
+    --palette-green-light: #73a942;
+    --palette-green-lighter: #aad576;
+    --palette-green-lightest: #c7f9cc;
+
+    --text-white-primary: #fff;
+    --text-white-secondary: #fbfbfc;
+
+    --text-black-primary: rgba(0,0,0,0.84);
+    --text-black-secondary: rgba(0,0,0,0.54);
+
+    --font-family-viking: 'Viking-Normal', "Roboto", sans-serif;
+
+    --font-size-microcopy: 0.55rem;
+    --font-size-baseline: 100%;
+    --font-size-smallest: 0.666rem;
+    --font-size-smaller: 0.8rem;
+    --font-size-small: 0.9rem;
+    --font-size-normal: 1rem;
+    --font-size-large: 1.333rem;
+    --font-size-larger: 1.5rem;
+    --font-size-largest: 2.4rem;
+
+    --font-weight-normal: 300;
+    --font-weight-bold: 500;
+    --font-weight-bolder: 700;
+
+    --palette-primary: #CF7505;
+    --palette-background: #170604;
+    --palette-neutral: #C7C8C8;
+    --palette-foreground: #fff;
+    --palette-positive: #2dbc4e;
+    --palette-warning: #F05E23;
+    --palette-negative: #af1629;
+    --palette-accessibility: red;
+    --palette-black: #121212;
+
+    --palette-divider-light: rgba(255, 255, 255, 8%);
+    --palette-divider-dark: rgba(0, 0, 0, 8%);
+
+    --text-color-primary: var(--text-black-primary);
+    --text-color-secondary: var(--text-black-secondary);
+
+    --breakpoint-desktop-lower: 68rem;
+    --breakpoint-tablet-upper: calc(var(--breakpoint-desktop-lower) - 1px);
+
+	@media (prefers-color-scheme: dark) {
+		@include color-scheme-black();
+	}
+
+	@media (prefers-color-scheme: light) {
+		@include color-scheme-white();
+	}
+}
+
+* {
+	box-sizing: border-box;
+	color: inherit;
+	fill: inherit;
+
+    line-height: 125%;
+}
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i, a,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, main, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:inherit;
+    font-weight:inherit;
+    vertical-align:baseline;
+    background:transparent;
+	color:inherit;
+
+    -webkit-background-clip: padding-box;
+    -moz-background-clip:    padding;
+    background-clip:         padding-box;
+}
+
+html, body {
+	@include apply-scheme();
+
+	font-family: "Roboto", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: greyscale;
+	letter-spacing: 0.02rem;
+
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-baseline);
+
+	-webkit-appearance:none;
+}
+
+textarea {
+	font-family: "Roboto", sans-serif;
+	tab-size: 4;
+}
+
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section {
+	display:block;
+}
+
+ul, ol {
+    list-style:none;
+}
+
+blockquote, q {
+    quotes:none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content:'';
+    content:none;
+}
+
+a {
+	text-decoration:none;
+    color: var(--color-text-primary);
+    fill: var(--color-text-primary);
+}
+
+/* change colours to suit your needs */
+ins {
+    background-color:#ff9;
+    color:#000;
+    text-decoration:none;
+	font-family: "Roboto", sans-serif;
+    display: inline-block;
+    white-space: nowrap;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+}
+
+/* change colours to suit your needs */
+mark {
+    background-color:#ff9;
+    color:#000;
+    font-weight:bold;
+	font-family: "Roboto", sans-serif;
+    display: inline-block;
+    white-space: nowrap;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+    border-bottom:1px dotted;
+    cursor:help;
+}
+
+/* change border color to suit your needs */
+hr {
+    display:block;
+    height:1px;
+    border:0;
+    margin:0;
+    padding:0;
+
+	background-color: var(--color-divider);
+}
+
+strong {
+	font-weight: 800;
+}
+
+input, select {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: var(--font-size-normal);
+    background: var(--color-background-primary);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-divider);
+    border-radius: 4px;
+}
+
+/* CLEARFIX GROUP */
+.group:after {
+	visibility: hidden;
+	display: block;
+	content: "";
+	clear: both;
+	height: 0;
+	}
+* html .group             { zoom: 1; } /* IE6 */
+*:first-child+html .group { zoom: 1; } /* IE7 */
+
+/* ANCHOR TARGETS */
+.x-target {
+    display:none;
+}
+
+/* HIDDEN */
+.hidden {
+	display:none !important;
+}
+
+svg {
+	fill: inherit;
+}
+
+* html .v3-cFormField > legend             { zoom: 1; } /* IE6 */
+*:first-child+html .v3-cFormField > legend { zoom: 1; } /* IE7 */
