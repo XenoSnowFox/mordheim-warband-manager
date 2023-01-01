@@ -1,15 +1,17 @@
 {
 	"name": "mordheim-warband-manager",
 	"scripts": {
-		"build": "webpack",
+		"copyResources": "copyfiles --up 4 ./src/main/resources/public/**/* ./build",
+		"build": "webpack && npm run copyResources",
 		"clean": "tsc --build --clean",
 		"format": "prettier --write ./src"
 	},
 	"devDependencies": {
+		"copyfiles": "^2.4.1",
 		"prettier": "^2.8.1",
 		"ts-loader": "^9.4.2",
 		"typescript": "^4.9.4",
 		"webpack": "^5.75.0",
 		"webpack-cli": "^5.0.1"
-	},
+	}
 }
