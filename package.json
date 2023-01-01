@@ -1,6 +1,7 @@
 {
 	"name": "mordheim-warband-manager",
 	"scripts": {
+		"serve:dev": "html-pages -r ./build",
 		"resources:copy": "copyfiles --up 4 ./src/main/resources/public/**/* ./build",
 		"sass:compile": "node-sass --outputStyle compressed src/main/sass/ -o build/",
 		"build": "npm run format && webpack && npm run sass:compile && npm run resources:copy",
@@ -9,6 +10,7 @@
 	},
 	"devDependencies": {
 		"copyfiles": "^2.4.1",
+		"html-pages": "^3.1.0",
 		"node-sass": "^8.0.0",
 		"prettier": "^2.8.1",
 		"ts-loader": "^9.4.2",
