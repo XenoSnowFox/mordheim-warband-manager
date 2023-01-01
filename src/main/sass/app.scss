@@ -79,11 +79,11 @@
 	--breakpoint-tablet-upper: calc(var(--breakpoint-desktop-lower) - 1px);
 
 	@media (prefers-color-scheme: dark) {
-		@include color-scheme-dark();
+		@include color-preference-dark();
 	}
 
 	@media (prefers-color-scheme: light) {
-		@include color-scheme-light();
+		@include color-preference-light();
 	}
 }
 
@@ -338,3 +338,9 @@ svg {
 *:first-child + html .v3-cFormField > legend {
 	zoom: 1;
 } /* IE7 */
+
+
+
+.mwm {
+	@import "./components";
+}
