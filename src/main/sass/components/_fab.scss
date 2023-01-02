@@ -1,0 +1,34 @@
+@import "../mixin/color-scheme", "../mixin/font-scheme";
+
+&-fab {
+	@include color-primary-container();
+	@include font-label-large();
+
+	position: fixed;
+	bottom: 1rem;
+	right: 1rem;
+	border-radius: 1rem;
+	border: 0;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 4rem;
+
+	padding: 0 1rem;
+	height: 3.5rem;
+
+	box-shadow: rgba(0, 0, 0, 0.19) 0px 0.625rem 1.25rem, rgba(0, 0, 0, 0.23) 0px 0.375rem 0.375rem;
+
+	&:active {
+		box-shadow: rgba(0, 0, 0, 0.12) 0px 0.0625rem 0.1875rem, rgba(0, 0, 0, 0.24) 0px 0.0625rem 0.125rem;
+	}
+
+	span {
+		padding: 0 0.5rem;
+	}
+
+	svg {
+		height: 1.5rem;
+	}
+}
