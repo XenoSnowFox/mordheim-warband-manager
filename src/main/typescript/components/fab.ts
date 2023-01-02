@@ -24,9 +24,6 @@ export default class Fab implements View {
 
 		this._container.appendChild(withSvg);
 		this._container.appendChild(this._label);
-
-		console.log(withSvg);
-		console.log("" + withSvg);
 	}
 
 	public addOnClickListener(withListener: OnClickListener): void {
