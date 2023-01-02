@@ -127,6 +127,12 @@
 	fill: var(--md-sys-color-on-primary-container);
 }
 
+@mixin color-secondary-container() {
+	background-color: var(--md-sys-color-secondary-container);
+	color: var(--md-sys-color-on-secondary-container);
+	fill: var(--md-sys-color-on-secondary-container);
+}
+
 @mixin apply-scheme() {
 	background: var(--color-background-primary);
 	color: var(--color-text-primary);
