@@ -1,4 +1,4 @@
-@import "./mixin/color-scheme";
+@import "./mixin/color-scheme", "./mixin/font-scheme";
 
 :root {
 	--palette-black-darkest: #000;
@@ -42,8 +42,6 @@
 
 	--text-black-primary: rgba(0, 0, 0, 0.84);
 	--text-black-secondary: rgba(0, 0, 0, 0.54);
-
-	--font-family-viking: "Viking-Normal", "Roboto", sans-serif;
 
 	--font-size-microcopy: 0.55rem;
 	--font-size-baseline: 100%;
@@ -183,20 +181,8 @@ video {
 
 html,
 body {
-	@include apply-scheme();
-
-	font-family: "Roboto", sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: greyscale;
-	letter-spacing: 0.02rem;
-
-	font-size: 100%;
-	-webkit-text-size-adjust: 100%;
-	-ms-text-size-adjust: 100%;
-
-	font-weight: var(--font-weight-normal);
-	font-size: var(--font-size-baseline);
-
+	@include color-background();
+	@include font-body-medium();
 	-webkit-appearance: none;
 }
 

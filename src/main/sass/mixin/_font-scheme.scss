@@ -1,0 +1,141 @@
+@mixin apply-font-scheme() {
+	font-family: var(--font-family);
+	line-height: var(--font-line-height);
+	font-size: var(--font-size);
+	font-weight: var(--font-weight);
+	letter-spacing: var(--font-tracking);
+
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: greyscale;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+}
+
+@mixin font-defaults() {
+	--font-family: "Roboto", sans-serif;
+	--font-tracking: 0;
+	--font-weight: 400;
+}
+
+// DISPLAY FONTS
+@mixin font-display-large() {
+	@include font-defaults();
+	--font-line-height: 4rem;
+	--font-size: 3.5625rem;
+	@include apply-font-scheme();
+}
+
+@mixin font-display-medium() {
+	@include font-defaults();
+	--font-line-height: 3.25rem;
+	--font-size: 2.8125rem;
+	@include apply-font-scheme();
+}
+
+@mixin font-display-small() {
+	@include font-defaults();
+	--font-line-height: 2.75rem;
+	--font-size: 2.25rem;
+	@include apply-font-scheme();
+}
+
+// HEADLINE FONTS
+@mixin font-headline-large() {
+	@include font-defaults();
+	--font-line-height: 2.5rem;
+	--font-size: 2rem;
+	@include apply-font-scheme();
+}
+
+@mixin font-headline-medium() {
+	@include font-defaults();
+	--font-line-height: 2.25rem;
+	--font-size: 1.75rem;
+	@include apply-font-scheme();
+}
+
+@mixin font-headline-small() {
+	@include font-defaults();
+	--font-line-height: 1rem;
+	--font-size: 1.5rem;
+	@include apply-font-scheme();
+}
+
+// TITLE FONTS
+@mixin font-title-large() {
+	@include font-defaults();
+	--font-line-height: 1.75rem;
+	--font-size: 1.375rem;
+	@include apply-font-scheme();
+}
+
+@mixin font-title-medium() {
+	@include font-defaults();
+	--font-line-height: 1.5rem;
+	--font-size: 1rem;
+	--font-tracking: 0.009375rem;
+	--font-weight: 500;
+	@include apply-font-scheme();
+}
+
+@mixin font-title-small() {
+	@include font-defaults();
+	--font-line-height: 1.25rem;
+	--font-size: 0.875rem;
+	--font-tracking: 0.00625rem;
+	--font-weight: 500;
+	@include apply-font-scheme();
+}
+
+// LABEL FONTS
+@mixin font-label-large() {
+	@include font-defaults();
+	--font-line-height: 1.25rem;
+	--font-size: 0.875rem;
+	--font-tracking: 0.00625rem;
+	--font-weight: 500;
+	@include apply-font-scheme();
+}
+
+@mixin font-label-medium() {
+	@include font-defaults();
+	--font-line-height: 1rem;
+	--font-size: 0.75rem;
+	--font-tracking: 0.03125rem;
+	--font-weight: 500;
+	@include apply-font-scheme();
+}
+
+@mixin font-label-small() {
+	@include font-defaults();
+	--font-line-height: 1rem;
+	--font-size: 0.6875rem;
+	--font-tracking: 0.03125rem;
+	--font-weight: 500;
+	@include apply-font-scheme();
+}
+
+// BODY FONTS
+@mixin font-body-large() {
+	@include font-defaults();
+	--font-line-height: 1.5rem;
+	--font-size: 1rem;
+	--font-tracking: 0.03125rem;
+	@include apply-font-scheme();
+}
+
+@mixin font-body-medium() {
+	@include font-defaults();
+	--font-line-height: 1.25rem;
+	--font-size: 0.875rem;
+	--font-tracking: 0.015625rem;
+	@include apply-font-scheme();
+}
+
+@mixin font-body-small() {
+	@include font-defaults();
+	--font-line-height: 1rem;
+	--font-size: 0.75rem;
+	--font-tracking: 0.025rem;
+	@include apply-font-scheme();
+}
