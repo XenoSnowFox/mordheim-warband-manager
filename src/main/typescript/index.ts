@@ -1,7 +1,7 @@
 import localStorageAvailable from "./utils/local-storage-available";
 import FullPageError from "./components/full-page-error";
-import TestView from "./views/test";
 import ViewManager from "./utils/view-manager";
+import ListMyWarbandsView from "./views/list-my-warbands";
 
 // run main application
 (() => {
@@ -12,7 +12,7 @@ import ViewManager from "./utils/view-manager";
 	}
 
 	// do any initial setup
-	const initialView = new TestView();
+	const initialView = new ListMyWarbandsView();
 
 	// run the application
 	ViewManager.push(initialView);
