@@ -75,22 +75,10 @@
 
 	--breakpoint-desktop-lower: 68rem;
 	--breakpoint-tablet-upper: calc(var(--breakpoint-desktop-lower) - 1px);
-
-	@media (prefers-color-scheme: dark) {
-		@include color-preference-dark();
-	}
-
-	@media (prefers-color-scheme: light) {
-		@include color-preference-light();
-	}
 }
 
 * {
 	box-sizing: border-box;
-	color: inherit;
-	fill: inherit;
-
-	line-height: 125%;
 }
 
 html,
@@ -179,9 +167,12 @@ video {
 	background-clip: padding-box;
 }
 
-html,
-body {
+html {
 	@include color-background();
+	-webkit-appearance: none;
+}
+
+body {
 	@include font-body-medium();
 	-webkit-appearance: none;
 }
