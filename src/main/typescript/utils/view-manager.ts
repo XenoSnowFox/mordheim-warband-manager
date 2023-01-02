@@ -33,6 +33,8 @@ const pushView = (nextView: View) => {
 
 	// call the load on the new
 	nextView.onDomLoad();
+
+	window.history.pushState(null, null, document.URL);
 };
 
 const popView = () => {
@@ -53,6 +55,8 @@ const popView = () => {
 	viewStack.push(currentView);
 	currentView.onDomLoad();
 };
+
+window.addEventListener("popstate", (evt) => popView());
 
 export default {
 	push: pushView,
