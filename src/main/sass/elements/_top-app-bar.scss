@@ -2,17 +2,21 @@
 
 &-topAppBar {
 	@include color-surface();
+	position: relative;
 
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 4rem;
+	padding: 0 0.25rem;
 
 	h1 {
 		@include font-title-large();
 		flex: none;
 		order: 0;
 		text-align: center;
+		min-width: max-content;
+		margin: 0 0.75rem;
 
 		> small {
 			@include font-title-small();
@@ -21,7 +25,62 @@
 		}
 	}
 
+	&-actions {
+		flex: 1 100%;
+		white-space: nowrap;
+		min-width: max-content;
+
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		margin: 0 0.75rem;
+
+		&:last-of-type {
+			justify-content: flex-end;
+		}
+	}
+
 	svg {
 		height: 1.5rem;
+	}
+
+	&[data-style="large"] {
+		display: block;
+		padding: 0;
+		height: 9.5rem;
+
+		h1 {
+			@include font-headline-medium();
+			text-align: left;
+
+			position: absolute;
+			left: 0;
+			bottom: 1rem;
+			margin: 0 1rem;
+
+			> small {
+				@include font-title-medium();
+				padding-left: 0.25rem;
+				text-align: left;
+			}
+		}
+
+		.mwm-element-topAppBar-actions {
+			position: absolute;
+			top: 1.25rem;
+			margin: 0 1rem;
+
+			&:first-of-type {
+				left: 0;
+			}
+
+			&:last-of-type {
+				right: 0;
+
+				> * {
+					margin-left: 1.5rem;
+				}
+			}
+		}
 	}
 }
