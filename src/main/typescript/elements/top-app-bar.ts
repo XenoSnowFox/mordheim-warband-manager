@@ -1,14 +1,26 @@
 import View from "../sdk/view";
 
 export default class TopAppBar implements View {
+	private _container: HTMLDivElement = document.createElement("div");
+	private _headline: HTMLHeadingElement = document.createElement("h1");
+	private _subhead: HTMLElement = document.createElement("small");
+
 	private _title: string;
 
 	public constructor() {
-		this._title = "";
+		this._container.classList.add("mwm-element-topAppBar");
+
+		this.headline = "";
+		this._container.appendChild(this._headline);
 	}
 
-	public set title(withTitle: string) {
-		this._title = withTitle;
+	public set headline(withTitle: string) {
+		this._headline.textContent = withTitle;
+		this._headline.appendChild(this._subhead);
+	}
+
+	public set subhead(withValue: string) {
+		this._subhead.textContent = withValue;
 	}
 
 	public onDomLoad() {}
@@ -16,13 +28,6 @@ export default class TopAppBar implements View {
 	public onDomUnload() {}
 
 	public htmlElements(): Array<HTMLElement> {
-		var message = document.createElement("h1");
-		message.textContent = this._title;
-
-		var container = document.createElement("header");
-		container.appendChild(message);
-		container.classList.add("mwm-element-topAppBar");
-
-		return [container];
+		return [this._container];
 	}
 }

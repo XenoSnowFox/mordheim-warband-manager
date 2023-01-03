@@ -20,7 +20,7 @@ export default class CreateWarbandView implements View {
 	private _startingGoldContainer: HTMLDivElement = document.createElement("div");
 
 	public constructor() {
-		this._topAppBar.title = "Create Warband";
+		this._topAppBar.headline = "Create Warband";
 
 		this._buttonDiv.classList.add("mwm-view-createWarband-buttons");
 		this._nameContainer.classList.add("mwm-view-createWarband-container");

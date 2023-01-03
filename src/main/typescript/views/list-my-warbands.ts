@@ -16,7 +16,7 @@ export default class ListMyWarbandsView implements View {
 	public constructor() {
 		this._container.classList.add("mwm-view-listMyWarbands-container");
 
-		this._topAppBar.title = "My Warbands";
+		this._topAppBar.headline = "My Warbands";
 
 		this._fab.label = "Create Warband";
 		this._fab.svg = Svg.plus();
