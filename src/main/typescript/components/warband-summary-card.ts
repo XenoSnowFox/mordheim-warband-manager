@@ -1,9 +1,13 @@
 import AssistChip from "../elements/assist-chip";
 import Card from "../elements/card";
 import { CardType } from "../enums/card-type";
+import WarbandModel from "../models/warband-model";
+import warbandRepository from "../repositories/warband-repository";
 import WarbandSummaryDao from "../repositories/warband-summary-dao";
 import View from "../sdk/view";
 import svg from "../utils/svg";
+import viewManager from "../utils/view-manager";
+import ViewWarbandView from "../views/view-warband";
 
 export default class WarbandSummaryCard implements View {
 	private _stats: HTMLDivElement = document.createElement("div");
@@ -16,18 +20,8 @@ export default class WarbandSummaryCard implements View {
 
 	public set warband(withWarband: WarbandSummaryDao) {
 		this._stats.classList.add("mwm-component-warbandSummaryCard-stats");
-		this._container.headline = withWarband.name;
-		this._container.subhead = withWarband.type;
-
-		// const coinChip = new AssistChip();
-		// coinChip.label = "" + withWarband.goldCrowns;
-		// coinChip.svg = svg.circleMultipleOutline();
-		// coinChip.htmlElements().forEach((htmlElement) => this._container.appendChild(htmlElement));
-
-		// const wyrdstoneChip = new AssistChip();
-		// wyrdstoneChip.label = "" + withWarband.wyrdstoneFragments;
-		// wyrdstoneChip.svg = svg.diamondStone();
-		// wyrdstoneChip.htmlElements().forEach((htmlElement) => this._container.appendChild(htmlElement));
+		this._container.headline = withWarband.name || "???";
+		this._container.subhead = withWarband.type || "Unknown";
 
 		this._container.appendChild(document.createElement("hr"));
 		this._container.appendChild(this._stats);
