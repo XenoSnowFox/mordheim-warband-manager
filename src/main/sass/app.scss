@@ -309,13 +309,21 @@ svg {
 	fill: inherit;
 }
 
+/* IE6 */
 * html .v3-cFormField > legend {
 	zoom: 1;
-} /* IE6 */
+}
+/* IE7 */
 *:first-child + html .v3-cFormField > legend {
 	zoom: 1;
-} /* IE7 */
+}
+
+hr {
+	height: 0.0625rem;
+	background: var(--md-sys-color-outline-variant);
+	margin: 0.25rem 0.5rem;
+}
 
 .mwm {
-	@import "./components";
+	@import "./elements", "./components", "./views";
 }
