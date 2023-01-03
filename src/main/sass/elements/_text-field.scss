@@ -1,0 +1,44 @@
+@import "../mixin/color-scheme", "../mixin/font-scheme";
+
+&-textField {
+	// @include color-primary-container();
+	// @include font-label-large();
+
+	border-radius: 0.25rem;
+	border: 0.0625rem solid var(--md-sys-color-outline);
+
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	padding: 0;
+
+	> label {
+		@include color-surface();
+		@include font-body-large();
+		padding: 0 0.25rem;
+		top: 1rem;
+
+		position: absolute;
+		left: 0.75rem;
+		transition: top 250ms, font-size 250ms, padding 250ms;
+		transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+	}
+
+	> input {
+		@include font-body-large();
+
+		padding: 0 1rem;
+		height: 3.5rem;
+		outline: 0;
+
+		&:not(:placeholder-shown),
+		&:focus {
+			~ label {
+				@include font-body-small();
+				top: -0.5rem;
+			}
+		}
+	}
+}

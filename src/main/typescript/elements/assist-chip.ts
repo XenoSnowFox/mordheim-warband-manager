@@ -2,13 +2,13 @@ import OnClickListener from "../listeners/on-click-listener";
 import View from "../sdk/view";
 import { SvgElement } from "../utils/svg-element";
 
-export default class Fab implements View {
-	private _container: HTMLElement = document.createElement("button");
-	private _label: HTMLElement = document.createElement("span");
+export default class AssistChip implements View {
+	private _container: HTMLSpanElement = document.createElement("span");
+	private _label: HTMLSpanElement = document.createElement("span");
 	private _onClickListeners: Array<OnClickListener> = [];
 
 	public constructor() {
-		this._container.classList.add("mwm-component-fab");
+		this._container.classList.add("mwm-element-assistChip");
 		this._container.appendChild(this._label);
 		this._container.addEventListener("click", (e) => this.click());
 	}
@@ -21,7 +21,6 @@ export default class Fab implements View {
 		while (this._container.childNodes.length) {
 			this._container.removeChild(this._container.childNodes[0]);
 		}
-
 		this._container.appendChild(withSvg);
 		this._container.appendChild(this._label);
 	}

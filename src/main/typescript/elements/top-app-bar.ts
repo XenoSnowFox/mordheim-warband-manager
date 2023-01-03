@@ -21,7 +21,7 @@ export default class TopAppBar implements View {
 
 		var container = document.createElement("header");
 		container.appendChild(message);
-		container.classList.add("mwm-component-topAppBar");
+		container.classList.add("mwm-element-topAppBar");
 
 		return [container];
 	}

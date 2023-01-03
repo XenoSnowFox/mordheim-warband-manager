@@ -1,17 +1,14 @@
-import { ButtonType } from "../enums/button-type";
 import OnClickListener from "../listeners/on-click-listener";
 import View from "../sdk/view";
 import { SvgElement } from "../utils/svg-element";
 
-export default class Button implements View {
+export default class Fab implements View {
 	private _container: HTMLElement = document.createElement("button");
 	private _label: HTMLElement = document.createElement("span");
 	private _onClickListeners: Array<OnClickListener> = [];
 
 	public constructor() {
-		this.type = ButtonType.FILLED;
-
-		this._container.classList.add("mwm-component-button");
+		this._container.classList.add("mwm-element-fab");
 		this._container.appendChild(this._label);
 		this._container.addEventListener("click", (e) => this.click());
 	}
@@ -20,14 +17,11 @@ export default class Button implements View {
 		this._label.textContent = withLabel;
 	}
 
-	public set type(withType: ButtonType) {
-		this._container.setAttribute("data-type", withType);
-	}
-
 	public set svg(withSvg: SvgElement) {
 		while (this._container.childNodes.length) {
 			this._container.removeChild(this._container.childNodes[0]);
 		}
+
 		this._container.appendChild(withSvg);
 		this._container.appendChild(this._label);
 	}
