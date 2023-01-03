@@ -6,6 +6,7 @@ export default class WarbandModel {
 	private _type: string = "";
 	private _goldCrowns: number = 0;
 	private _wyrdstoneFragments: number = 0;
+	private _warriorLimit: number = 0;
 
 	public get id(): string {
 		return this._id;
@@ -29,6 +30,10 @@ export default class WarbandModel {
 
 	public get wyrdstoneFragments() {
 		return this._wyrdstoneFragments;
+	}
+
+	public get warriorLimit() {
+		return this._warriorLimit;
 	}
 
 	public set id(withIdentifier: string) {
@@ -57,5 +62,13 @@ export default class WarbandModel {
 		}
 
 		this._wyrdstoneFragments += withAmount;
+	}
+
+	public set warriorLimit(withAmount: number) {
+		if (withAmount < 1) {
+			throw new Error("Warrior Limit must be greater than zero.");
+		}
+
+		this._warriorLimit = withAmount;
 	}
 }

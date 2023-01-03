@@ -4,4 +4,5 @@ export default interface WarbandDao {
 	type: string;
 	goldCrowns: number;
 	wyrdstoneFragments: number;
+	warriorLimit: number;
 }

@@ -13,11 +13,13 @@ export default class CreateWarbandView implements View {
 	private _nameTextField: TextField = new TextField();
 	private _typeTextField: TextField = new TextField();
 	private _startingGoldTextField: TextField = new TextField();
+	private _warriorLimitTextField: TextField = new TextField();
 
 	private _buttonDiv: HTMLDivElement = document.createElement("div");
 	private _nameContainer: HTMLDivElement = document.createElement("div");
 	private _typeContainer: HTMLDivElement = document.createElement("div");
 	private _startingGoldContainer: HTMLDivElement = document.createElement("div");
+	private _warriorLimitContainer: HTMLDivElement = document.createElement("div");
 
 	public constructor() {
 		this._topAppBar.headline = "Create Warband";
@@ -26,6 +28,7 @@ export default class CreateWarbandView implements View {
 		this._nameContainer.classList.add("mwm-view-createWarband-container");
 		this._typeContainer.classList.add("mwm-view-createWarband-container");
 		this._startingGoldContainer.classList.add("mwm-view-createWarband-container");
+		this._warriorLimitContainer.classList.add("mwm-view-createWarband-container");
 
 		const cancelButton = new Button();
 		cancelButton.label = "Cancel";
@@ -49,6 +52,11 @@ export default class CreateWarbandView implements View {
 		this._startingGoldTextField.value = "500";
 		this._startingGoldTextField.inputType = InputType.NUMBER;
 		this._startingGoldTextField.htmlElements().forEach((htmlElement) => this._startingGoldContainer.appendChild(htmlElement));
+
+		this._warriorLimitTextField.label = "Warrior Limit";
+		this._warriorLimitTextField.value = "15";
+		this._warriorLimitTextField.inputType = InputType.NUMBER;
+		this._warriorLimitTextField.htmlElements().forEach((htmlElement) => this._warriorLimitContainer.appendChild(htmlElement));
 	}
 
 	public onCancelClick() {
@@ -59,12 +67,14 @@ export default class CreateWarbandView implements View {
 		const warbandName = this._nameTextField.value;
 		const warbandType = this._typeTextField.value;
 		const startingGold = this._startingGoldTextField.value;
+		const warriorLimit = this._warriorLimitTextField.value;
 
 		// #TODO validate
 
 		const warbandModel = new WarbandModel();
 		warbandModel.name = warbandName;
 		warbandModel.type = warbandType;
+		warbandModel.warriorLimit = parseInt(warriorLimit);
 		warbandModel.addGoldCrowns(parseInt(startingGold));
 
 		warbandRepository.store(warbandModel);
@@ -79,6 +89,13 @@ export default class CreateWarbandView implements View {
 	public onDomUnload() {}
 
 	public htmlElements(): Array<HTMLElement> {
-		return [...this._topAppBar.htmlElements(), this._nameContainer, this._typeContainer, this._startingGoldContainer, this._buttonDiv];
+		return [
+			...this._topAppBar.htmlElements(),
+			this._nameContainer,
+			this._typeContainer,
+			this._startingGoldContainer,
+			this._warriorLimitContainer,
+			this._buttonDiv,
+		];
 	}
 }
