@@ -1,3 +1,7 @@
+:root {
+	--system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
 @mixin apply-font-scheme() {
 	font-family: var(--font-family);
 	line-height: var(--font-line-height);
@@ -12,7 +16,7 @@
 }
 
 @mixin font-defaults() {
-	--font-family: "Roboto", sans-serif;
+	--font-family: var(--system-ui);
 	--font-tracking: 0;
 	--font-weight: 400;
 }
