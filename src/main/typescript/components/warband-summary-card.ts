@@ -38,6 +38,14 @@ export default class WarbandSummaryCard implements View {
 		ratingChip.label = "" + withWarband.rating;
 		ratingChip.svg = svg.medal();
 		ratingChip.htmlElements().forEach((htmlElement) => this._stats.appendChild(htmlElement));
+
+		this._container.addOnClickListener({
+			onClick: (view) => {
+				const warband: WarbandModel = warbandRepository.fetch(withWarband.id);
+				const warbandView: ViewWarbandView = new ViewWarbandView(warband);
+				viewManager.push(warbandView);
+			},
+		});
 	}
 
 	public onDomLoad() {}
