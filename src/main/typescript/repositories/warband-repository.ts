@@ -1,5 +1,10 @@
+import { WarbandDesignation } from "../enums/warband-designation";
+import UnitStatsModel from "../models/unit-stats";
+import WarbandMemberModel from "../models/warband-member-model";
 import WarbandModel from "../models/warband-model";
+import UnitStatsDao from "./unit-stats-dao";
 import WarbandDao from "./warband-dao";
+import WarbandMemberDao from "./warband-member-dao";
 import WarbandSummariesDao from "./warband-summaires-dao";
 import WarbandSummaryDao from "./warband-summary-dao";
 
@@ -11,12 +16,66 @@ const getWarbandById = (withId: string): WarbandModel | null => {
 	const dao: WarbandDao = JSON.parse(json);
 
 	const model = new WarbandModel();
-	model.id = dao.id;
-	model.name = dao.name;
-	model.type = dao.type;
-	model.warriorLimit = dao.warriorLimit;
-	model.addGoldCrowns(dao.goldCrowns);
-	model.addWyrdstoneFragments(dao.wyrdstoneFragments);
+	model.id = dao.id || withId;
+	model.name = dao.name || "";
+	model.type = dao.type || "";
+	model.warriorLimit = dao.warriorLimit || 7;
+	model.addGoldCrowns(dao.goldCrowns || 0);
+	model.addWyrdstoneFragments(dao.wyrdstoneFragments || 0);
+	(dao.members || [])
+		.filter((model) => !!model)
+		.map((member) => parseWarbandMemberDao(member))
+		.forEach((member) => model.addMember(member));
+	return model;
+};
+
+const parseUnitStatsModel = (model: UnitStatsModel): UnitStatsDao => ({
+	movement: model.movement,
+	weaponSkill: model.weaponSkill,
+	ballisticSkill: model.ballisticSkill,
+	strength: model.strength,
+	toughness: model.toughness,
+	wounds: model.wounds,
+	initiative: model.initiative,
+	attack: model.attack,
+	leadership: model.leadership,
+});
+
+const parseUnitStatsDao = (dao: UnitStatsDao): UnitStatsModel => {
+	const model = new UnitStatsModel();
+	model.movement = dao.movement || 0;
+	model.weaponSkill = dao.weaponSkill || 0;
+	model.ballisticSkill = dao.ballisticSkill || 0;
+	model.strength = dao.strength || 0;
+	model.toughness = dao.toughness || 0;
+	model.wounds = dao.wounds || 0;
+	model.initiative = dao.initiative || 0;
+	model.attack = dao.attack || 0;
+	model.leadership = dao.leadership || 0;
+	return model;
+};
+
+const parseWarbandMemberModel = (model: WarbandMemberModel): WarbandMemberDao => ({
+	name: model.name,
+	type: model.type,
+	designation: model.designation,
+	memberCount: model.memberCount,
+	experience: model.experience,
+	stats: parseUnitStatsModel(model._stats),
+	racialMaximum: parseUnitStatsModel(model._racialMaximum),
+	recruitmentCost: model.recruitmentCost,
+});
+
+const parseWarbandMemberDao = (dao: WarbandMemberDao): WarbandMemberModel => {
+	const model = new WarbandMemberModel();
+	(model.name = dao.name || ""),
+		(model.type = dao.type || ""),
+		(model.designation = dao.designation || WarbandDesignation.HENCHMEN),
+		(model._stats = parseUnitStatsDao(dao.stats)),
+		(model._racialMaximum = parseUnitStatsDao(dao.racialMaximum)),
+		(model.recruitmentCost = dao.recruitmentCost || 0);
+	model.addMembers(dao.memberCount || 0);
+	model.addExperiences(dao.experience || 0);
 	return model;
 };
 
@@ -28,6 +87,12 @@ const storeWarband = (model: WarbandModel) => {
 		goldCrowns: model.goldCrowns,
 		wyrdstoneFragments: model.wyrdstoneFragments,
 		warriorLimit: model.warriorLimit,
+
+		members: [
+			...[model.leader ? parseWarbandMemberModel(model.leader) : undefined],
+			...model.heros.map((model) => parseWarbandMemberModel(model)),
+			...model.henchmen.map((model) => parseWarbandMemberModel(model)),
+		].filter((model) => !!model),
 	};
 
 	window.localStorage.setItem(`warband:${model.id}`, JSON.stringify(dao));
