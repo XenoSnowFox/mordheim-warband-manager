@@ -7,6 +7,7 @@ import WarbandModel from "../models/warband-model";
 import warbandRepository from "../repositories/warband-repository";
 import View from "../sdk/view";
 import ViewManager from "../utils/view-manager";
+import ViewWarbandView from "./view-warband";
 
 export default class CreateWarbandView implements View {
 	private _topAppBar: TopAppBar = new TopAppBar();
@@ -79,9 +80,8 @@ export default class CreateWarbandView implements View {
 
 		warbandRepository.store(warbandModel);
 
-		this.onCancelClick();
-
-		// #TODO open warband view
+		ViewManager.pop();
+		ViewManager.push(new ViewWarbandView(warbandModel));
 	}
 
 	public onDomLoad() {}
