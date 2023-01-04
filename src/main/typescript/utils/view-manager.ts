@@ -15,6 +15,8 @@ const renderDom = () => {
 	const currentView = viewStack.pop();
 	viewStack.push(currentView);
 	currentView.htmlElements().forEach((element) => domBody.appendChild(element));
+
+	setTimeout(() => window.scrollTo(0, 0), 1);
 };
 
 const pushView = (nextView: View) => {
