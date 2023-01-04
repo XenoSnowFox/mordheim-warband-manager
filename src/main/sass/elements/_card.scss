@@ -5,6 +5,7 @@
 	border: 0;
 	margin: 0.5rem;
 	padding: 0;
+	overflow: hidden;
 
 	display: block;
 
@@ -46,5 +47,13 @@
 
 	&-content {
 		padding: 0.5rem;
+	}
+
+	&-footer {
+		border-top: 0.0625rem solid var(--md-sys-color-outline-variant);
+
+		&:empty {
+			display: none;
+		}
 	}
 }

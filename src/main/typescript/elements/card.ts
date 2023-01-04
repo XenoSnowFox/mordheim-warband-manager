@@ -1,10 +1,12 @@
 import { CardType } from "../enums/card-type";
 import OnClickListener from "../listeners/on-click-listener";
 import View from "../sdk/view";
+import dom from "../utils/dom";
 
 export default class Card implements View {
-	private _container: HTMLDivElement = document.createElement("div");
-	private _content: HTMLDivElement = document.createElement("div");
+	private _container: HTMLElement = document.createElement("article");
+	private _content: HTMLElement = document.createElement("section");
+	private _footer: HTMLElement = document.createElement("footer");
 	private _headline: HTMLSpanElement = document.createElement("span");
 	private _subhead: HTMLSpanElement = document.createElement("span");
 
@@ -15,6 +17,7 @@ export default class Card implements View {
 
 		this._container.classList.add("mwm-element-card");
 		this._container.appendChild(this._content);
+		this._container.appendChild(this._footer);
 		this._container.addEventListener("click", (evt) => this.click());
 
 		this._headline.classList.add("mwm-element-card-headline");
@@ -24,6 +27,8 @@ export default class Card implements View {
 		this._content.classList.add("mwm-element-card-content");
 		this._content.appendChild(this._headline);
 		this._content.appendChild(this._subhead);
+
+		this._footer.classList.add("mwm-element-card-footer");
 	}
 
 	public set type(withType: CardType) {
@@ -40,6 +45,10 @@ export default class Card implements View {
 
 	public appendChild(withNode: HTMLElement) {
 		this._content.appendChild(withNode);
+	}
+
+	public appendFooterView(withView: View) {
+		dom.appendView(this._footer, withView);
 	}
 
 	public addOnClickListener(withListener: OnClickListener): void {
