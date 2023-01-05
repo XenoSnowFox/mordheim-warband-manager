@@ -1,6 +1,7 @@
 import Button from "../elements/button";
 import Fab from "../elements/fab";
 import TopAppBar from "../elements/top-app-bar";
+import { ButtonType } from "../enums/button-type";
 import { TopAppBarStyle } from "../enums/top-app-bar-style";
 import View from "../sdk/view";
 import dom from "../utils/dom";
@@ -30,6 +31,7 @@ export default class AboutView implements View {
 
 		const eraseDataButton = new Button();
 		eraseDataButton.label = "Erase All Data";
+		eraseDataButton.type = ButtonType.TONAL;
 		eraseDataButton.addOnClickListener({
 			onClick: () => {
 				viewManager.pop();
