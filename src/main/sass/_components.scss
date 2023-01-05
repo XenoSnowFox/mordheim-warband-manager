@@ -1,3 +1,4 @@
 &-component {
-	@import "./components/full-page-error", "./components/unit-stats-grid", "./components/warband-summary-card";
+	@import "./components/empty-state", "./components/full-page-error", "./components/unit-stats-grid", "./components/warband-member-summary-card",
+		"./components/warband-summary-card";
 }

@@ -2,14 +2,34 @@
 
 &-recruitWarbandMember {
 	&-container {
-		margin: 2rem 1rem;
+		margin: 1rem;
+	}
+
+	&-costContainer {
+		margin: 1rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+
+		> * {
+			flex: 1 100%;
+
+			+ * {
+				margin-left: 1rem;
+			}
+		}
+	}
+
+	&-heading {
+		@include font-title-medium();
+		margin: 2rem 1rem 0;
 	}
 
 	&-buttons {
 		display: flex;
 		justify-content: stretch;
 		align-items: center;
-		margin: 1rem;
+		margin: 2rem 1rem 1rem;
 
 		> * {
 			margin: 0.5rem;
