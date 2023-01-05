@@ -11,8 +11,10 @@ import WarbandModel from "../models/warband-model";
 import warbandRepository from "../repositories/warband-repository";
 import View from "../sdk/view";
 import dom from "../utils/dom";
+import svg from "../utils/svg";
 import Svg from "../utils/svg";
 import viewManager from "../utils/view-manager";
+import EditWarbandView from "./edit-warband";
 import RecruitWarbandMemberView from "./recruit-warband-member";
 
 export default class ViewWarbandView implements View {
@@ -49,6 +51,10 @@ export default class ViewWarbandView implements View {
 
 		this._topAppBar.showBackButton = true;
 		this._topAppBar.style = TopAppBarStyle.LARGE;
+
+		const editAction = svg.pencil();
+		editAction.onclick = () => viewManager.push(new EditWarbandView(withWarband));
+		this._topAppBar.addAction(editAction);
 
 		this._fab.label = "Hire Member";
 		this._fab.svg = Svg.plus();
