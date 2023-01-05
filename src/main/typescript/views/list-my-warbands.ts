@@ -3,8 +3,11 @@ import Fab from "../elements/fab";
 import TopAppBar from "../elements/top-app-bar";
 import warbandRepository from "../repositories/warband-repository";
 import View from "../sdk/view";
+import svg from "../utils/svg";
 import Svg from "../utils/svg";
+import viewManager from "../utils/view-manager";
 import ViewManager from "../utils/view-manager";
+import AboutView from "./about";
 import CreateWarbandView from "./create-warband";
 
 export default class ListMyWarbandsView implements View {
@@ -21,6 +24,10 @@ export default class ListMyWarbandsView implements View {
 		this._fab.label = "Create Warband";
 		this._fab.svg = Svg.plus();
 		this._fab.addOnClickListener({ onClick: this.onFabClicked });
+
+		const aboutAction = svg.informationOutline();
+		aboutAction.onclick = () => viewManager.push(new AboutView());
+		this._topAppBar.addAction(aboutAction);
 	}
 
 	private onFabClicked() {

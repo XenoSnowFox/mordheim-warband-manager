@@ -54,6 +54,10 @@ export default class TopAppBar implements View {
 		}
 	}
 
+	public addAction(withSvg: SvgElement) {
+		this._rightActions.appendChild(withSvg);
+	}
+
 	public onDomLoad() {}
 
 	public onDomUnload() {}
