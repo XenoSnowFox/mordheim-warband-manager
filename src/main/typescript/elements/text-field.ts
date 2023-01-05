@@ -8,6 +8,8 @@ export default class TextField implements View {
 	private _label: HTMLLabelElement = document.createElement("label");
 	private _input: HTMLInputElement = document.createElement("input");
 
+	public onChange: () => void = () => {};
+
 	public constructor() {
 		this.inputType = InputType.TEXT;
 
@@ -18,6 +20,7 @@ export default class TextField implements View {
 		this._input.id = this._id;
 		this._input.value = "";
 		this._input.setAttribute("placeholder", " ");
+		this._input.onchange = () => this.onChange();
 
 		this._label.setAttribute("for", this._id);
 	}
