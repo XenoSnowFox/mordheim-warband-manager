@@ -1,0 +1,11 @@
+&-warbandMemberSummaryCard {
+	&-chips {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+
+		> * {
+			margin-left: 0.125rem;
+		}
+	}
+}
