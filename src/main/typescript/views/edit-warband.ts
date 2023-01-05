@@ -7,7 +7,9 @@ import WarbandModel from "../models/warband-model";
 import warbandRepository from "../repositories/warband-repository";
 import View from "../sdk/view";
 import dom from "../utils/dom";
+import viewManager from "../utils/view-manager";
 import ViewManager from "../utils/view-manager";
+import DisbandWarbandView from "./disband-warband";
 
 export default class EditWarbandView implements View {
 	private _warband: WarbandModel;
@@ -20,6 +22,8 @@ export default class EditWarbandView implements View {
 	private _nameContainer: HTMLDivElement = document.createElement("div");
 	private _typeContainer: HTMLDivElement = document.createElement("div");
 	private _warriorLimitContainer: HTMLDivElement = document.createElement("div");
+
+	private _disbandContainer: HTMLDivElement = document.createElement("div");
 
 	public constructor(withWarband: WarbandModel) {
 		this._warband = withWarband;
@@ -52,6 +56,24 @@ export default class EditWarbandView implements View {
 		this._warriorLimitTextField.inputType = InputType.NUMBER;
 		this._warriorLimitTextField.htmlElements().forEach((htmlElement) => this._warriorLimitContainer.appendChild(htmlElement));
 
+		const disbandTitle = document.createElement("h2");
+		disbandTitle.textContent = "Disband Warband";
+		this._disbandContainer.appendChild(disbandTitle);
+
+		const disbandMessage = document.createElement("p");
+		disbandMessage.textContent = "All the warriors in the warband, any equipment and any other benefits the warband has acquired will be lost.";
+		this._disbandContainer.appendChild(disbandMessage);
+
+		const disbandButton = new Button();
+		disbandButton.label = "Disband";
+		disbandButton.type = ButtonType.TONAL;
+		disbandButton.addOnClickListener({
+			onClick: () => {
+				viewManager.pop();
+				viewManager.push(new DisbandWarbandView(withWarband));
+			},
+		});
+		dom.appendView(this._disbandContainer, disbandButton);
 	}
 
 	public onSaveClicked() {
@@ -75,6 +97,8 @@ export default class EditWarbandView implements View {
 			this._typeContainer,
 			this._warriorLimitContainer,
 			this._buttonDiv,
+			document.createElement("hr"),
+			this._disbandContainer,
 		];
 	}
 }

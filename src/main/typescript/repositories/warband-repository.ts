@@ -98,6 +98,14 @@ const storeWarband = (model: WarbandModel) => {
 	window.localStorage.setItem(`warband:${model.id}`, JSON.stringify(dao));
 };
 
+const deleteWarband = (model: WarbandModel) => {
+	const summaries: WarbandSummariesDao = getWarbandSummaries();
+	delete summaries[model.id];
+	window.localStorage.setItem("warband-summaries", JSON.stringify(summaries));
+
+	window.localStorage.removeItem("warband:" + model.id);
+};
+
 const getWarbandSummaries = (): WarbandSummariesDao => {
 	const json: string = window.localStorage.getItem("warband-summaries") || "{}";
 	const dao: WarbandSummariesDao = {};
@@ -158,6 +166,11 @@ export default {
 
 	fetch(warbandId: string) {
 		return getWarbandById(warbandId);
+	},
+
+	delete(warbandId: string) {
+		const warband = getWarbandById(warbandId);
+		warband && deleteWarband(warband);
 	},
 
 	eraseAll() {
