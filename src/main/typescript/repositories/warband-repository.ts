@@ -134,6 +134,18 @@ const storeWarbandSummary = (model: WarbandModel) => {
 	window.localStorage.setItem("warband-summaries", JSON.stringify(summaries));
 };
 
+const eraseAllWarbands = () => {
+	window.localStorage.removeItem("warband-summaries");
+
+	for (var i in window.localStorage) {
+		if (!i.startsWith("warband:")) {
+			continue;
+		}
+
+		window.localStorage.removeItem(i);
+	}
+};
+
 export default {
 	list() {
 		return getWarbandSummaries();
@@ -146,5 +158,9 @@ export default {
 
 	fetch(warbandId: string) {
 		return getWarbandById(warbandId);
+	},
+
+	eraseAll() {
+		eraseAllWarbands();
 	},
 };

@@ -1,3 +1,4 @@
 &-view {
-	@import "./views/create-warband", "./views/list-my-warbands", "./views/recruit-warband-member", "./views/view-warband";
+	@import "./views/about", "./views/create-warband", "./views/erase-data", "./views/list-my-warbands", "./views/recruit-warband-member",
+		"./views/view-warband";
 }

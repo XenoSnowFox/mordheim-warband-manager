@@ -1,0 +1,21 @@
+&-eraseData {
+	&-container {
+		margin: 2rem 1rem;
+
+		p {
+			text-align: center;
+		}
+	}
+
+	&-buttons {
+		display: flex;
+		justify-content: stretch;
+		align-items: center;
+		margin: 1rem;
+
+		> * {
+			margin: 0.5rem;
+			flex: 1 100%;
+		}
+	}
+}
