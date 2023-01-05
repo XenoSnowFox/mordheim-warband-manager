@@ -22,8 +22,9 @@ export default class RecruitWarbandMemberView implements View {
 	private _buttonDiv: HTMLDivElement = document.createElement("div");
 	private _nameContainer: HTMLDivElement = document.createElement("div");
 	private _typeContainer: HTMLDivElement = document.createElement("div");
-	private _recruitmentCostContainer: HTMLDivElement = document.createElement("div");
-	private _startingExperienceContainer: HTMLDivElement = document.createElement("div");
+	private _costContainer: HTMLDivElement = document.createElement("div");
+
+	private _statsHeading: HTMLHeadingElement = document.createElement("h2");
 
 	private _statContainer: HTMLDivElement = document.createElement("div");
 	private _startingMovementStat: TextField = new TextField();
@@ -46,6 +47,8 @@ export default class RecruitWarbandMemberView implements View {
 	private _maximumAttacksStat: TextField = new TextField();
 	private _maximumLeadershipStat: TextField = new TextField();
 
+	private _createButton: Button = new Button();
+
 	public onRecruitCallback: (withMember: WarbandMemberModel) => void = () => {};
 
 	public constructor(withDesignation: WarbandDesignation) {
@@ -57,14 +60,12 @@ export default class RecruitWarbandMemberView implements View {
 		this._buttonDiv.classList.add("mwm-view-recruitWarbandMember-buttons");
 		this._nameContainer.classList.add("mwm-view-recruitWarbandMember-container");
 		this._typeContainer.classList.add("mwm-view-recruitWarbandMember-container");
-		this._recruitmentCostContainer.classList.add("mwm-view-recruitWarbandMember-container");
-		this._startingExperienceContainer.classList.add("mwm-view-recruitWarbandMember-container");
+		this._costContainer.classList.add("mwm-view-recruitWarbandMember-costContainer");
 
-		const createButton = new Button();
-		createButton.label = "Recruit " + withDesignation;
-		createButton.type = ButtonType.FILLED;
-		createButton.addOnClickListener({ onClick: () => this.onCreateClick() });
-		createButton.htmlElements().forEach((htmlElement) => this._buttonDiv.appendChild(htmlElement));
+		this._createButton.label = "Hire for free";
+		this._createButton.type = ButtonType.FILLED;
+		this._createButton.addOnClickListener({ onClick: () => this.onCreateClick() });
+		this._createButton.htmlElements().forEach((htmlElement) => this._buttonDiv.appendChild(htmlElement));
 
 		this._nameTextField.label = withDesignation + "'s Name";
 		this._nameTextField.htmlElements().forEach((htmlElement) => this._nameContainer.appendChild(htmlElement));
@@ -72,15 +73,19 @@ export default class RecruitWarbandMemberView implements View {
 		this._typeTextField.label = withDesignation + "'s Type";
 		this._typeTextField.htmlElements().forEach((htmlElement) => this._typeContainer.appendChild(htmlElement));
 
-		this._recruitmentCostTextField.label = "Recruitment Cost";
-		this._recruitmentCostTextField.value = "0";
+		this._recruitmentCostTextField.label = "Cost To Hire";
+		this._recruitmentCostTextField.value = "";
 		this._recruitmentCostTextField.inputType = InputType.NUMBER;
-		this._recruitmentCostTextField.htmlElements().forEach((htmlElement) => this._recruitmentCostContainer.appendChild(htmlElement));
+		this._recruitmentCostTextField.htmlElements().forEach((htmlElement) => this._costContainer.appendChild(htmlElement));
+		this._recruitmentCostTextField.onChange = () => this.updateCost();
 
 		this._startingExperienceTextField.label = "Starting Experience";
-		this._startingExperienceTextField.value = "0";
+		this._startingExperienceTextField.value = "";
 		this._startingExperienceTextField.inputType = InputType.NUMBER;
-		this._startingExperienceTextField.htmlElements().forEach((htmlElement) => this._startingExperienceContainer.appendChild(htmlElement));
+		this._startingExperienceTextField.htmlElements().forEach((htmlElement) => this._costContainer.appendChild(htmlElement));
+
+		this._statsHeading.classList.add("mwm-view-recruitWarbandMember-heading");
+		this._statsHeading.textContent = withDesignation + "'s Stats";
 
 		// stat grid
 		this._statContainer.classList.add("mwm-view-recruitWarbandMember-statGrid");
@@ -95,17 +100,25 @@ export default class RecruitWarbandMemberView implements View {
 		this.appendStat(this._statContainer, "Leadership", this._startingLeadershipStat, this._maximumLeadershipStat);
 	}
 
+	private updateCost() {
+		let cost = 0;
+
+		cost += Math.max(0, parseInt(this._recruitmentCostTextField.value.trim() || "0"));
+
+		this._createButton.label = "Hire for " + (cost ? cost + "gc" : "free");
+	}
+
 	private appendStat(grid: HTMLDivElement, statName: string, startingTextField: TextField, maximumTextField: TextField) {
 		const label = document.createElement("span");
 		label.textContent = statName;
 		grid.appendChild(label);
 
-		startingTextField.value = "0";
+		startingTextField.value = "";
 		startingTextField.inputType = InputType.NUMBER;
 		startingTextField.label = "Starting";
 		dom.appendView(grid, startingTextField);
 
-		maximumTextField.value = "0";
+		maximumTextField.value = "";
 		maximumTextField.inputType = InputType.NUMBER;
 		maximumTextField.label = "Racial Max.";
 		dom.appendView(grid, maximumTextField);
@@ -113,34 +126,34 @@ export default class RecruitWarbandMemberView implements View {
 
 	public onCreateClick() {
 		const warbandMember = new WarbandMemberModel();
-		warbandMember.name = this._nameTextField.value;
-		warbandMember.type = this._typeTextField.value;
+		warbandMember.name = this._nameTextField.value.trim();
+		warbandMember.type = this._typeTextField.value.trim();
 		warbandMember.designation = this._designation;
 		warbandMember.addMembers(1);
-		warbandMember.recruitmentCost = parseInt(this._recruitmentCostTextField.value);
-		warbandMember.addExperiences(parseInt(this._startingExperienceTextField.value));
+		warbandMember.recruitmentCost = parseInt(this._recruitmentCostTextField.value.trim());
+		warbandMember.addExperiences(parseInt(this._startingExperienceTextField.value.trim()));
 
 		const startingStats = warbandMember._stats;
-		startingStats.movement = parseInt(this._startingMovementStat.value);
-		startingStats.weaponSkill = parseInt(this._startingWeaponSkillStat.value);
-		startingStats.ballisticSkill = parseInt(this._startingBallisticSkillStat.value);
-		startingStats.strength = parseInt(this._startingStrengthStat.value);
-		startingStats.toughness = parseInt(this._startingToughnessStat.value);
-		startingStats.wounds = parseInt(this._startingWoundsStat.value);
-		startingStats.initiative = parseInt(this._startingInitiativeStat.value);
-		startingStats.attack = parseInt(this._startingAttacksStat.value);
-		startingStats.leadership = parseInt(this._startingLeadershipStat.value);
+		startingStats.movement = parseInt(this._startingMovementStat.value.trim());
+		startingStats.weaponSkill = parseInt(this._startingWeaponSkillStat.value.trim());
+		startingStats.ballisticSkill = parseInt(this._startingBallisticSkillStat.value.trim());
+		startingStats.strength = parseInt(this._startingStrengthStat.value.trim());
+		startingStats.toughness = parseInt(this._startingToughnessStat.value.trim());
+		startingStats.wounds = parseInt(this._startingWoundsStat.value.trim());
+		startingStats.initiative = parseInt(this._startingInitiativeStat.value.trim());
+		startingStats.attack = parseInt(this._startingAttacksStat.value.trim());
+		startingStats.leadership = parseInt(this._startingLeadershipStat.value.trim());
 
 		const racialMaximumStats = warbandMember._racialMaximum;
-		racialMaximumStats.movement = parseInt(this._maximumMovementStat.value);
-		racialMaximumStats.weaponSkill = parseInt(this._maximumWeaponSkillStat.value);
-		racialMaximumStats.ballisticSkill = parseInt(this._maximumBallisticSkillStat.value);
-		racialMaximumStats.strength = parseInt(this._maximumStrengthStat.value);
-		racialMaximumStats.toughness = parseInt(this._maximumToughnessStat.value);
-		racialMaximumStats.wounds = parseInt(this._maximumWoundsStat.value);
-		racialMaximumStats.initiative = parseInt(this._maximumInitiativeStat.value);
-		racialMaximumStats.attack = parseInt(this._maximumAttacksStat.value);
-		racialMaximumStats.leadership = parseInt(this._maximumLeadershipStat.value);
+		racialMaximumStats.movement = parseInt(this._maximumMovementStat.value.trim());
+		racialMaximumStats.weaponSkill = parseInt(this._maximumWeaponSkillStat.value.trim());
+		racialMaximumStats.ballisticSkill = parseInt(this._maximumBallisticSkillStat.value.trim());
+		racialMaximumStats.strength = parseInt(this._maximumStrengthStat.value.trim());
+		racialMaximumStats.toughness = parseInt(this._maximumToughnessStat.value.trim());
+		racialMaximumStats.wounds = parseInt(this._maximumWoundsStat.value.trim());
+		racialMaximumStats.initiative = parseInt(this._maximumInitiativeStat.value.trim());
+		racialMaximumStats.attack = parseInt(this._maximumAttacksStat.value.trim());
+		racialMaximumStats.leadership = parseInt(this._maximumLeadershipStat.value.trim());
 
 		this.onRecruitCallback(warbandMember);
 	}
@@ -154,8 +167,8 @@ export default class RecruitWarbandMemberView implements View {
 			...this._topAppBar.htmlElements(),
 			this._nameContainer,
 			this._typeContainer,
-			this._recruitmentCostContainer,
-			this._startingExperienceContainer,
+			this._costContainer,
+			this._statsHeading,
 			this._statContainer,
 			this._buttonDiv,
 		];
