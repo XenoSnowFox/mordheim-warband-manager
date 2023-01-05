@@ -30,11 +30,11 @@ const pushView = (nextView: View) => {
 	// add the new view
 	viewStack.push(nextView);
 
-	// rerender the dom
-	renderDom();
-
 	// call the load on the new
 	nextView.onDomLoad();
+
+	// rerender the dom
+	renderDom();
 
 	window.history.pushState(null, null, document.URL);
 };
@@ -49,13 +49,13 @@ const popView = () => {
 	const previousView = viewStack.pop();
 	previousView.onDomUnload();
 
-	// rerender the dom
-	renderDom();
-
 	// call the load on the new
 	const currentView = viewStack.pop();
 	viewStack.push(currentView);
 	currentView.onDomLoad();
+
+	// rerender the dom
+	renderDom();
 };
 
 window.addEventListener("popstate", (evt) => popView());
