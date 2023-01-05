@@ -130,6 +130,7 @@ export default class ViewWarbandView implements View {
 			const recruitmentCost = withMember.recruitmentCost;
 			if (warband.goldCrowns < recruitmentCost) {
 				// #TODO show insufficient funds error
+				alert("Not enough gold.");
 				return;
 			}
 
