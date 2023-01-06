@@ -4,8 +4,8 @@ const viewStack: Array<View> = [];
 const domBody: HTMLElement = document.body;
 
 const renderDom = () => {
-	while (domBody.children.length) {
-		domBody.removeChild(domBody.children[0]);
+	while (domBody.lastChild) {
+		domBody.removeChild(domBody.lastChild);
 	}
 
 	if (viewStack.length == 0) {
