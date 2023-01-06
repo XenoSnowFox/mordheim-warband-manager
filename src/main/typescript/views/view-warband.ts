@@ -44,6 +44,12 @@ export default class ViewWarbandView implements View {
 	private _dramaticPersonaCounter: AssistChip = new AssistChip();
 	private _hireDramaticPersonaButton: Button = new Button();
 
+	private _chipsContainer: HTMLDivElement = document.createElement("div");
+	private _goldChip: AssistChip = new AssistChip();
+	private _wyrdstoneChip: AssistChip = new AssistChip();
+	private _memberCountChip: AssistChip = new AssistChip();
+	private _ratingChip: AssistChip = new AssistChip();
+
 	public constructor(withWarband: WarbandModel) {
 		this._warband = withWarband;
 
@@ -59,6 +65,24 @@ export default class ViewWarbandView implements View {
 		this._fab.label = "Hire Member";
 		this._fab.svg = Svg.plus();
 		this._fab.addOnClickListener({ onClick: this.onFabClicked });
+
+		this._chipsContainer.classList.add("mwm-view-viewWarband-chips");
+
+		this._goldChip.svg = svg.circleMultipleOutline();
+		this._goldChip.label = "" + withWarband.goldCrowns;
+		dom.appendView(this._chipsContainer, this._goldChip);
+
+		this._wyrdstoneChip.svg = svg.diamondStone();
+		this._wyrdstoneChip.label = "" + withWarband.wyrdstoneFragments;
+		dom.appendView(this._chipsContainer, this._wyrdstoneChip);
+
+		this._memberCountChip.svg = svg.accountGroup();
+		this._memberCountChip.label = "" + withWarband.totalMemberCount;
+		dom.appendView(this._chipsContainer, this._memberCountChip);
+
+		this._ratingChip.svg = svg.medal();
+		this._ratingChip.label = "" + withWarband.rating;
+		dom.appendView(this._chipsContainer, this._ratingChip);
 
 		this._leaderHeading.classList.add("mwm-view-viewWarband-memberHeading");
 		this._leaderHeading.appendChild(
@@ -218,6 +242,6 @@ export default class ViewWarbandView implements View {
 	public onDomUnload() {}
 
 	public htmlElements(): Array<HTMLElement> {
-		return [...this._topAppBar.htmlElements(), /*...this._fab.htmlElements(),*/ this._container];
+		return [...this._topAppBar.htmlElements(), /*...this._fab.htmlElements(),*/ this._chipsContainer, this._container];
 	}
 }

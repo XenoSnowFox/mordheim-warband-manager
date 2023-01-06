@@ -5,6 +5,19 @@
 		margin: 0.5rem 0.5rem 6rem;
 	}
 
+	&-chips {
+		margin: 0 0.5rem;
+
+		display: flex;
+		justify-content: start;
+		align-items: center;
+
+		> * {
+			margin-top: 0;
+			flex: 1 100%;
+		}
+	}
+
 	&-memberHeading {
 		display: flex;
 		justify-content: space-between;

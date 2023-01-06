@@ -49,6 +49,10 @@ export default class WarbandModel {
 		return !!this.leader;
 	}
 
+	public get totalMemberCount(): number {
+		return this.heroCount() + this.henchmenCount();
+	}
+
 	public heroCount(): number {
 		return this.heros.length;
 	}
