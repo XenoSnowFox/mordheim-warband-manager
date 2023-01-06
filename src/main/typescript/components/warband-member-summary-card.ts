@@ -6,6 +6,8 @@ import WarbandMemberModel from "../models/warband-member-model";
 import View from "../sdk/view";
 import dom from "../utils/dom";
 import svg from "../utils/svg";
+import viewManager from "../utils/view-manager";
+import ViewWarbandMemberView from "../views/view-warband-member";
 import UnitStatsGridView from "./unit-stats-grid";
 
 export default class WarbandMemberSummaryCard implements View {
@@ -28,9 +30,7 @@ export default class WarbandMemberSummaryCard implements View {
 		this._unitStatsGrid.stats = withMember._stats;
 
 		this._container.addOnClickListener({
-			onClick: (view) => {
-				console.log("LEADER:", withMember);
-			},
+			onClick: (view) => viewManager.push(new ViewWarbandMemberView(withMember)),
 		});
 
 		while (this._chipsContainer.childNodes.length) {
