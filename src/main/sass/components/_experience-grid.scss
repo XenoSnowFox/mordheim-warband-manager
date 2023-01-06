@@ -1,0 +1,49 @@
+@import "../mixin/color-scheme", "../mixin/font-scheme";
+
+&-experienceGrid {
+	margin: 1rem 0.5rem;
+
+	&-heading {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin: 0;
+
+		> span:first-child {
+			@include font-title-medium();
+		}
+	}
+
+	&-grid {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-evenly;
+		align-items: center;
+		margin: 0 -0.25rem;
+
+		> div {
+			white-space: nowrap;
+			margin: 0.0625rem;
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+
+			> span {
+				display: block;
+				margin: 0.0625rem;
+				padding: 0.125rem;
+				border: 0.0625rem solid var(--md-sys-color-outline);
+
+				&.mwm-component-experienceGrid-milestone {
+					border: 0.1875rem solid var(--md-sys-color-outline);
+					padding: 0;
+				}
+			}
+		}
+	}
+
+	svg {
+		height: 0.8125rem;
+		display: block;
+	}
+}

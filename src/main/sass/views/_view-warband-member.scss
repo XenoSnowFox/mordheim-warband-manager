@@ -1,0 +1,18 @@
+@import "../mixin/color-scheme", "../mixin/font-scheme";
+
+&-viewWarbandMember {
+	&-container {
+		margin: 0.5rem 0.5rem 6rem;
+	}
+
+	&-memberHeading {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin: 2rem 0.5rem 0;
+
+		> span:first-child {
+			@include font-title-medium();
+		}
+	}
+}
