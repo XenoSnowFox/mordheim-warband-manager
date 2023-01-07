@@ -1,8 +1,9 @@
-@import "../mixin/color-scheme", "../mixin/font-scheme";
+@import "../mixin/color-scheme", "../mixin/elevation-scheme", "../mixin/font-scheme";
 
 &-assistChip {
 	@include color-outline();
 	@include color-surface();
+	@include elevation-0();
 
 	border-radius: 1.5rem;
 
@@ -13,6 +14,12 @@
 
 	padding: 0 0.5rem;
 	margin: 0.25rem;
+
+	cursor: pointer;
+
+	&:hover {
+		@include elevation-1();
+	}
 
 	span {
 		@include font-label-large();

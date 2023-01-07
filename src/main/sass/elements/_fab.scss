@@ -1,8 +1,9 @@
-@import "../mixin/color-scheme", "../mixin/font-scheme";
+@import "../mixin/color-scheme", "../mixin/elevation-scheme", "../mixin/font-scheme";
 
 &-fab {
 	@include color-primary-container();
 	@include font-label-large();
+	@include elevation-3();
 
 	position: fixed;
 	bottom: 1rem;
@@ -18,10 +19,8 @@
 	padding: 0 1rem;
 	height: 3.5rem;
 
-	box-shadow: rgba(0, 0, 0, 0.19) 0px 0.625rem 1.25rem, rgba(0, 0, 0, 0.23) 0px 0.375rem 0.375rem;
-
 	&:active {
-		box-shadow: rgba(0, 0, 0, 0.12) 0px 0.0625rem 0.1875rem, rgba(0, 0, 0, 0.24) 0px 0.0625rem 0.125rem;
+		@include elevation-1();
 	}
 
 	span {

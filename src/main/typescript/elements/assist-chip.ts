@@ -6,6 +6,7 @@ export default class AssistChip implements View {
 	private _container: HTMLSpanElement = document.createElement("span");
 	private _label: HTMLSpanElement = document.createElement("span");
 	private _onClickListeners: Array<OnClickListener> = [];
+	public onClick: (withAssistChip: AssistChip) => void = () => {};
 
 	public constructor() {
 		this._container.classList.add("mwm-element-assistChip");
@@ -40,6 +41,7 @@ export default class AssistChip implements View {
 
 	public click(): void {
 		this._onClickListeners.forEach((listener) => listener.onClick(this));
+		this.onClick(this);
 	}
 
 	public onDomLoad() {}
