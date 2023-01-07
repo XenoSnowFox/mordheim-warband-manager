@@ -1,4 +1,6 @@
+import GoldBottomSheet from "../components/gold-bottom-sheet";
 import WarbandMemberSummaryCard from "../components/warband-member-summary-card";
+import WyrdstoneBottomSheet from "../components/wyrdstone-bottom-sheet";
 import AssistChip from "../elements/assist-chip";
 import Button from "../elements/button";
 import Fab from "../elements/fab";
@@ -70,10 +72,18 @@ export default class ViewWarbandView implements View {
 
 		this._goldChip.svg = svg.circleMultipleOutline();
 		this._goldChip.label = "" + withWarband.goldCrowns;
+		this._goldChip.onClick = () => {
+			const bottomSheet = new GoldBottomSheet(withWarband.goldCrowns);
+			viewManager.showBottomSheet(bottomSheet);
+		};
 		dom.appendView(this._chipsContainer, this._goldChip);
 
 		this._wyrdstoneChip.svg = svg.diamondStone();
 		this._wyrdstoneChip.label = "" + withWarband.wyrdstoneFragments;
+		this._wyrdstoneChip.onClick = () => {
+			const bottomSheet = new WyrdstoneBottomSheet(withWarband.wyrdstoneFragments);
+			viewManager.showBottomSheet(bottomSheet);
+		};
 		dom.appendView(this._chipsContainer, this._wyrdstoneChip);
 
 		this._memberCountChip.svg = svg.accountGroup();
