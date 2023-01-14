@@ -1,5 +1,6 @@
 import GoldBottomSheet from "../components/gold-bottom-sheet";
 import WarbandMemberSummaryCard from "../components/warband-member-summary-card";
+import WarbandRatingBottomSheet from "../components/warband-rating-bottom-sheet";
 import WyrdstoneBottomSheet from "../components/wyrdstone-bottom-sheet";
 import AssistChip from "../elements/assist-chip";
 import Button from "../elements/button";
@@ -61,7 +62,7 @@ export default class ViewWarbandView implements View {
 		this._topAppBar.style = TopAppBarStyle.LARGE;
 
 		const editAction = svg.pencil();
-		editAction.onclick = () => viewManager.push(new EditWarbandView(withWarband));
+		editAction.onclick = () => viewManager.push(new EditWarbandView(this._warband));
 		this._topAppBar.addAction(editAction);
 
 		this._fab.label = "Hire Member";
@@ -71,27 +72,27 @@ export default class ViewWarbandView implements View {
 		this._chipsContainer.classList.add("mwm-view-viewWarband-chips");
 
 		this._goldChip.svg = svg.circleMultipleOutline();
-		this._goldChip.label = "" + withWarband.goldCrowns;
 		this._goldChip.onClick = () => {
-			const bottomSheet = new GoldBottomSheet(withWarband.goldCrowns);
+			const bottomSheet = new GoldBottomSheet(this._warband.goldCrowns);
 			viewManager.showBottomSheet(bottomSheet);
 		};
 		dom.appendView(this._chipsContainer, this._goldChip);
 
 		this._wyrdstoneChip.svg = svg.diamondStone();
-		this._wyrdstoneChip.label = "" + withWarband.wyrdstoneFragments;
 		this._wyrdstoneChip.onClick = () => {
-			const bottomSheet = new WyrdstoneBottomSheet(withWarband.wyrdstoneFragments);
+			const bottomSheet = new WyrdstoneBottomSheet(this._warband.wyrdstoneFragments);
 			viewManager.showBottomSheet(bottomSheet);
 		};
 		dom.appendView(this._chipsContainer, this._wyrdstoneChip);
 
 		this._memberCountChip.svg = svg.accountGroup();
-		this._memberCountChip.label = "" + withWarband.totalMemberCount;
 		dom.appendView(this._chipsContainer, this._memberCountChip);
 
 		this._ratingChip.svg = svg.medal();
-		this._ratingChip.label = "" + withWarband.rating;
+		this._ratingChip.onClick = () => {
+			const bottomSheet = new WarbandRatingBottomSheet(this._warband);
+			viewManager.showBottomSheet(bottomSheet);
+		};
 		dom.appendView(this._chipsContainer, this._ratingChip);
 
 		this._leaderHeading.classList.add("mwm-view-viewWarband-memberHeading");
@@ -247,6 +248,12 @@ export default class ViewWarbandView implements View {
 		this._dramaticPersonaCounter.label = "0 of ∞";
 		// this._container.appendChild(this._dramaticPersonaHeading);
 		// dom.appendView(this._container, this._hireDramaticPersonaButton);
+
+		// update chips
+		this._goldChip.label = "" + this._warband.goldCrowns;
+		this._wyrdstoneChip.label = "" + this._warband.wyrdstoneFragments;
+		this._memberCountChip.label = "" + this._warband.totalMemberCount;
+		this._ratingChip.label = "" + this._warband.rating;
 	}
 
 	public onDomUnload() {}

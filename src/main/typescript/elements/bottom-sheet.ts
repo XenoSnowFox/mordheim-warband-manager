@@ -4,28 +4,43 @@ import dom from "../utils/dom";
 import viewManager from "../utils/view-manager";
 
 export default class BottomSheet implements Element {
-	public rootElement: HTMLDivElement = document.createElement("div");
-	public container: HTMLDivElement = document.createElement("div");
+	private _rootElement: HTMLDivElement = document.createElement("div");
+	private _container: HTMLDivElement = document.createElement("div");
+	private _title: HTMLHeadingElement = document.createElement("h2");
 
 	public constructor() {
-		this.rootElement.classList.add("mwm-element-bottomSheet");
-		this.container.classList.add("mwm-element-bottomSheet-container");
+		this._rootElement.classList.add("mwm-element-bottomSheet");
 
-		this.rootElement.appendChild(this.container);
+		const wrapperElement = document.createElement("div");
+		wrapperElement.classList.add("mwm-element-bottomSheet-wrapper");
+		this._rootElement.appendChild(wrapperElement);
 
-		this.rootElement.onclick = () => viewManager.pop();
-		this.container.onclick = (evt) => {
+		wrapperElement.appendChild(this._title);
+
+		this._container.classList.add("mwm-element-bottomSheet-container");
+		wrapperElement.appendChild(this._container);
+
+		this._rootElement.onclick = () => viewManager.pop();
+		wrapperElement.onclick = (evt) => {
 			evt.preventDefault();
 			evt.stopPropagation();
 		};
 	}
 
+	public get rootElement(): HTMLElement {
+		return this._rootElement;
+	}
+
+	public set title(withTitle: string) {
+		this._title.textContent = withTitle;
+	}
+
 	public appendNode(withNode: Node) {
-		this.container.appendChild(withNode);
+		this._container.appendChild(withNode);
 	}
 
 	public appendView(withView: View) {
-		dom.appendView(this.container, withView);
+		dom.appendView(this._container, withView);
 	}
 
 	public onDismiss() {}

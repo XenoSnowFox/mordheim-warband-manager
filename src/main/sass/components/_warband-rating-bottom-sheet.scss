@@ -1,0 +1,41 @@
+@import "../mixin/color-scheme", "../mixin/font-scheme";
+
+&-warbandRatingBottomSheet {
+	&-title {
+		@include font-title-medium();
+		display: block;
+	}
+
+	p {
+		text-align: center;
+	}
+
+	&-calculations {
+		display: grid;
+		align-items: center;
+		align-content: center;
+		grid-template-columns: 1fr min-content;
+		column-gap: 1rem;
+
+		> hr {
+			margin: 0.5rem 0;
+		}
+
+		> span {
+			padding: 0.125rem 0;
+			&.heading {
+				@include font-label-medium();
+				margin-top: 0.5rem;
+			}
+
+			&.label {
+				padding-left: 1rem;
+			}
+
+			&:nth-child(2n) {
+				text-align: right;
+				@include font-label-large();
+			}
+		}
+	}
+}

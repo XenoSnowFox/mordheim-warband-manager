@@ -25,17 +25,17 @@ export default class WarbandModel {
 
 		if (this.hasLeader()) {
 			memberCount++;
-			grandTotalExperience += this.leader.experience;
+			grandTotalExperience += this.leader.experience || 0;
 		}
 
 		this.heros.forEach((hero) => {
 			memberCount++;
-			grandTotalExperience += hero.experience;
+			grandTotalExperience += hero.experience || 0;
 		});
 
 		this.henchmen.forEach((henchmen) => {
 			memberCount += henchmen.memberCount;
-			grandTotalExperience += henchmen.memberCount * henchmen.experience;
+			grandTotalExperience += henchmen.memberCount * (henchmen.experience || 0);
 		});
 
 		// #TODO: add large creature count

@@ -14,20 +14,45 @@
 	align-items: flex-end;
 	background-color: rgba(0, 0, 0, 0.6);
 
-	&-container {
+	&-wrapper {
 		@include color-surface();
 		@include elevation-0();
 
 		flex: 1 100%;
 		max-width: 40rem;
-		margin: 4.5rem 0 0;
 		border-radius: 1.75rem 1.75rem 0 0;
 		overflow: hidden;
 		border: 0;
-		padding: 3rem 1rem 1rem;
+		margin: 4.5rem 0 0;
 
 		@media (min-width: 40rem) {
 			margin: 4.5rem 3.5rem 0;
+		}
+
+		max-height: 95vh;
+		overflow-y: auto;
+	}
+
+	&-container {
+		padding: 3rem 1rem 2rem;
+		min-height: 20vh;
+	}
+
+	h2 {
+		@include font-title-medium();
+		text-align: center;
+		padding: 1rem 1rem 0;
+		// line-height: 3rem;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+
+		&:empty {
+			display: none;
+		}
+
+		& ~ div {
+			padding-top: 1rem;
 		}
 	}
 }

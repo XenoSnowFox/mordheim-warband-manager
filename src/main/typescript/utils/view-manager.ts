@@ -89,7 +89,10 @@ const removeBottomSheet = () => {
 	}
 
 	visibleNodes.bottomSheet.onDismiss();
-	visibleNodes.bottomSheet.rootElement.remove();
+	const parentNode = visibleNodes.bottomSheet.rootElement.parentNode;
+	if (parentNode) {
+		parentNode.removeChild(visibleNodes.bottomSheet.rootElement);
+	}
 	delete visibleNodes.bottomSheet;
 };
 
