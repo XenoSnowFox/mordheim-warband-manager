@@ -206,7 +206,7 @@ export default class ViewWarbandView implements View {
 		this._leaderCounter.label = (this._warband.hasLeader() ? "1" : "0") + " of 1";
 		this._container.appendChild(this._leaderHeading);
 		if (this._warband.hasLeader()) {
-			const card = new WarbandMemberSummaryCard();
+			const card = new WarbandMemberSummaryCard(this._warband);
 			card.warbandMember = this._warband.leader;
 			dom.appendView(this._container, card);
 		} else {
@@ -218,7 +218,7 @@ export default class ViewWarbandView implements View {
 		this._container.appendChild(this._heroHeading);
 		this._warband.heros
 			.map((hero) => {
-				const card = new WarbandMemberSummaryCard();
+				const card = new WarbandMemberSummaryCard(this._warband);
 				card.warbandMember = hero;
 				return card;
 			})
@@ -232,7 +232,7 @@ export default class ViewWarbandView implements View {
 		this._container.appendChild(this._henchmenHeading);
 		this._warband.henchmen
 			.map((henchmen) => {
-				const card = new WarbandMemberSummaryCard();
+				const card = new WarbandMemberSummaryCard(this._warband);
 				card.warbandMember = henchmen;
 				return card;
 			})
