@@ -8,6 +8,8 @@ export default class Button implements View {
 	private _label: HTMLElement = document.createElement("span");
 	private _onClickListeners: Array<OnClickListener> = [];
 
+	public onClick: (withButton: Button) => void = () => {};
+
 	public constructor() {
 		this.type = ButtonType.FILLED;
 
@@ -47,6 +49,7 @@ export default class Button implements View {
 
 	public click(): void {
 		this._onClickListeners.forEach((listener) => listener.onClick(this));
+		this.onClick(this);
 	}
 
 	public onDomLoad() {}

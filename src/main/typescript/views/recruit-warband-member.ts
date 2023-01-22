@@ -18,6 +18,7 @@ export default class RecruitWarbandMemberView implements View {
 
 	private _recruitmentCostTextField: TextField = new TextField();
 	private _startingExperienceTextField: TextField = new TextField();
+	private _memberCountTextField: TextField = new TextField();
 
 	private _buttonDiv: HTMLDivElement = document.createElement("div");
 	private _nameContainer: HTMLDivElement = document.createElement("div");
@@ -84,6 +85,13 @@ export default class RecruitWarbandMemberView implements View {
 		this._startingExperienceTextField.inputType = InputType.NUMBER;
 		this._startingExperienceTextField.htmlElements().forEach((htmlElement) => this._costContainer.appendChild(htmlElement));
 
+		this._memberCountTextField.label = "Group Size";
+		this._memberCountTextField.value = "1";
+		this._memberCountTextField.inputType = InputType.NUMBER;
+		withDesignation == WarbandDesignation.HENCHMEN &&
+			this._memberCountTextField.htmlElements().forEach((htmlElement) => this._costContainer.appendChild(htmlElement));
+		this._memberCountTextField.onChange = () => this.updateCost();
+
 		this._statsHeading.classList.add("mwm-view-recruitWarbandMember-heading");
 		this._statsHeading.textContent = withDesignation + "'s Stats";
 
@@ -104,6 +112,8 @@ export default class RecruitWarbandMemberView implements View {
 		let cost = 0;
 
 		cost += Math.max(0, parseInt(this._recruitmentCostTextField.value.trim() || "0"));
+
+		cost *= Math.max(1, parseInt(this._memberCountTextField.value.trim()));
 
 		this._createButton.label = "Hire for " + (cost ? cost + "gc" : "free");
 	}
@@ -129,7 +139,7 @@ export default class RecruitWarbandMemberView implements View {
 		warbandMember.name = this._nameTextField.value.trim();
 		warbandMember.type = this._typeTextField.value.trim();
 		warbandMember.designation = this._designation;
-		warbandMember.addMembers(1);
+		warbandMember.addMembers(Math.max(1, parseInt(this._memberCountTextField.value.trim())));
 		warbandMember.recruitmentCost = parseInt(this._recruitmentCostTextField.value.trim());
 		warbandMember.addExperiences(parseInt(this._startingExperienceTextField.value.trim()));
 

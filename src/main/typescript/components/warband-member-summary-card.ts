@@ -45,7 +45,7 @@ export default class WarbandMemberSummaryCard implements View {
 		}
 
 		const experienceChip = new AssistChip();
-		experienceChip.label = "" + withMember.experience;
+		experienceChip.label = "" + withMember.experience * withMember.memberCount;
 		experienceChip.svg = svg.school();
 		dom.appendView(this._chipsContainer, experienceChip);
 	}

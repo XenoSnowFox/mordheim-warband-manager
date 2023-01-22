@@ -73,14 +73,16 @@ export default class ViewWarbandView implements View {
 
 		this._goldChip.svg = svg.circleMultipleOutline();
 		this._goldChip.onClick = () => {
-			const bottomSheet = new GoldBottomSheet(this._warband.goldCrowns);
+			const bottomSheet = new GoldBottomSheet(this._warband);
+			bottomSheet.onDismiss = () => this.onDomLoad();
 			viewManager.showBottomSheet(bottomSheet);
 		};
 		dom.appendView(this._chipsContainer, this._goldChip);
 
 		this._wyrdstoneChip.svg = svg.diamondStone();
 		this._wyrdstoneChip.onClick = () => {
-			const bottomSheet = new WyrdstoneBottomSheet(this._warband.wyrdstoneFragments);
+			const bottomSheet = new WyrdstoneBottomSheet(this._warband);
+			bottomSheet.onDismiss = () => this.onDomLoad();
 			viewManager.showBottomSheet(bottomSheet);
 		};
 		dom.appendView(this._chipsContainer, this._wyrdstoneChip);

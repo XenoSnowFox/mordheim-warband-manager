@@ -66,20 +66,17 @@ export default class WarbandRatingBottomSheet extends BottomSheet {
 	}
 
 	private appendMemberCountCalculations(withWarband: WarbandModel, appendRow: (withLabel: string, withValue: string) => void) {
-		appendRow("Total Member (5 points per member)", "");
+		appendRow("Total Members (5 points per member)", "");
 		appendRow((withWarband.hasLeader() ? "1" : "No") + " Leader", "+" + (withWarband.hasLeader() ? 5 : 0).toString());
 		appendRow(
-			(withWarband.heroCount() ? withWarband.heroCount() : "No") + " Hero" + (withWarband.heroCount() == 1 ? "" : "s"),
+			(withWarband.heroCount() ? withWarband.heroCount() : "No") + " Hero" + (withWarband.heroCount() == 1 ? "" : "es"),
 			"+" + (withWarband.heroCount() * 5).toString()
 		);
-		appendRow(
-			(withWarband.henchmenCount() ? withWarband.henchmenCount() : "No") + " Henchmen" + (withWarband.henchmenCount() == 1 ? "" : "s"),
-			"+" + (withWarband.henchmenCount() * 5).toString()
-		);
+		appendRow((withWarband.henchmenCount() ? withWarband.henchmenCount() : "No") + " Henchmen", "+" + (withWarband.henchmenCount() * 5).toString());
 	}
 
 	private appendLargeCreatureCountCalculations(withWarband: WarbandModel, appendRow: (withLabel: string, withValue: string) => void) {
-		appendRow("Large Creature (20 points each)", "");
+		appendRow("Large Creatures (20 points each)", "");
 
 		appendRow("You have no large creatures.", "+0");
 	}
